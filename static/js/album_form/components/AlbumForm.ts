@@ -96,18 +96,18 @@ export default class AlbumForm extends Vue {
     submitForm(e: Event) {
         if (this.album_id) {
             Axios.put(`/api/albums/${this.album_id}`, this.formData)
-                .then(this.handleSuccesSubmit)
+                .then(this.handleSuccessSubmit)
                 .catch(this.handleErrorSubmit);
         } else {
             Axios.post(`/api/albums/`, this.formData)
-                .then(this.handleSuccesSubmit)
+                .then(this.handleSuccessSubmit)
                 .catch(this.handleErrorSubmit);
         }
 
         e.preventDefault();
     }
 
-    handleSuccesSubmit(res: any) {
+    handleSuccessSubmit(res: any) {
         console.log(res);
     }
 
