@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
-import Input from "./input/Input";
-import {Album, AlbumFormFields } from '../app.types';
+import { Component } from 'vue-property-decorator';
+import Input from './input/Input';
+import { Album, AlbumFormFields } from '../app.types';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookies';
 
@@ -36,19 +36,22 @@ const template = `
 })
 export default class AlbumForm extends Vue {
 
+    album_id: number | undefined;
     formData: Album = <Album>{};
     fields: AlbumFormFields = <AlbumFormFields>{};
     errors: Array<any> = [];
     loading: boolean = true;
 
     mounted() {
+        // @ts-ignore - Comes from the Django template
+        this.album_id = album_id;
         // Initialise our form data.
         // This data is what we will send to the server
         this.formData = {
-			    artist: 0,
-			    name: "test",
-			    releaseDate: "",
-			    numStars: 0
+            artist: 0,
+            name: 'test',
+            releaseDate: '',
+            numStars: 0,
         };
 
         this.getFormOptions();
@@ -57,11 +60,9 @@ export default class AlbumForm extends Vue {
 
 
     getAlbumData() {
-        // @ts-ignore - Comes from the Django template
-        let id = album_id;
 
-        if (id) {
-            Axios.get(`/api/albums/${id}`)
+        if (this.album_id) {
+            Axios.get(`/api/albums/${this.album_id}`)
                 .then((res) => {
                     this.formData = res.data;
                 })
@@ -84,25 +85,31 @@ export default class AlbumForm extends Vue {
             });
     }
 
-
     submitForm(e: Event) {
-        Axios.post('/api/albums/', this.formData)
-            .then(this.handleSuccesSubmit)
-            .catch(this.handleErrorSubmit);
+        if (this.album_id) {
+            Axios.put(`/api/albums/${this.album_id}`, this.formData)
+                .then(this.handleSuccesSubmit)
+                .catch(this.handleErrorSubmit);
+        } else {
+            Axios.post(`/api/albums/`, this.formData)
+                .then(this.handleSuccesSubmit)
+                .catch(this.handleErrorSubmit);
+        }
 
         e.preventDefault();
     }
 
-    handleSuccesSubmit (res: any) {
+    handleSuccesSubmit(res: any) {
         console.log(res);
     }
+
     handleErrorSubmit(err: any) {
         this.errors = err.response.data;
     }
 
     // Handle the on change of any input
     onChangeField(field: string, value: any) {
-    // @ts-ignore - so that we can use field inside formData
-    this.formData[field] = value;
+        // @ts-ignore - so that we can use field inside formData
+        this.formData[field] = value;
     }
 }
