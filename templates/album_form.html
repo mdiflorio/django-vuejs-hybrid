@@ -1,0 +1,9 @@
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'chunk-vendors' %}
+
+<div id="app" v-cloak class="container d-flex justify-content-center">
+    <album-form/>
+</div>
+
+{% render_bundle 'album_form' %}
+

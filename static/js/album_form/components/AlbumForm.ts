@@ -1,0 +1,79 @@
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+import Input from "./input/Input";
+import {Album, AlbumFormFields } from '../app.types';
+import axios from 'axios';
+import { getCookie } from '../../utils/cookies';
+
+
+const Axios = axios.create({
+    baseURL: '/music',
+    headers: { 'X-CSRFToken': getCookie('csrftoken') },
+});
+
+const template = `
+    <div v-if="loading" class="text-center" >
+        <i class="fa fa-spinner fa-spin fa-4x colored-text"></i>
+    </div>
+    <form v-else class="min-width" @submit="submitForm">   
+        <Input 
+			v-for="(field, fieldName) in fields"
+			:key="fieldName"
+            :name="fieldName"
+            :initial="formData.artist"
+            :field="field"
+            :errors="errors[fieldName]"
+            @on-change="onChangeField"
+        />
+    </form>
+`;
+
+@Component({
+    template,
+    name: 'AlbumForm',
+    components: { Input },
+})
+export default class AlbumForm extends Vue {
+
+    formData: Album = <Album>{};
+    fields: AlbumFormFields = <AlbumFormFields>{};
+    errors: Array<any> = [];
+    loading: boolean = true;
+
+    mounted() {
+        // Initialise our form data.
+        // This data is what we will send to the server
+        this.formData = {
+			    artist: 0,
+			    name: "",
+			    releaseDate: "",
+			    numStars: 0
+        };
+
+        this.getFormOptions();
+    }
+
+    getFormOptions() {
+        Axios.options('/api/albums')
+            .then((res) => {
+                this.fields = res.data.actions.POST;
+            })
+            .catch((err) => {
+                console.log('err', err);
+            })
+            .finally(() => {
+                this.loading = false;
+            });
+    }
+
+
+    submitForm() {
+        //TODO - add axios code
+    }
+
+    // Handle the on change of any input
+    onChangeField(field: string, value: any) {
+    // @ts-ignore - so that we can use field inside formData
+    this.formData[field] = value;
+    }
+}
