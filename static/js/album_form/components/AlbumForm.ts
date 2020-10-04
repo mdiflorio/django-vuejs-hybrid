@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Input from './input/Input';
-import { Album, AlbumFormFields } from '../app.types';
+import { Album, AlbumErrors, AlbumFormFields } from '../app.types';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookies';
 
@@ -11,20 +11,29 @@ const Axios = axios.create({
 });
 
 const template = `
-    <div v-if="loading" class="text-center" >
-        <i class="fa fa-spinner fa-spin fa-4x colored-text"></i>
+    <div v-if="loading" >
+        Loading...
     </div>
-    <form v-else class="min-width" @submit="submitForm">   
-        <Input 
-			v-for="(field, fieldName) in fields"
-			:key="fieldName"
-            :name="fieldName"
-            :initial="formData[fieldName]"
-            :field="field"
-            :errors="errors[fieldName]"
-            @on-change="onChangeField"
-        />
-        <button type="submit">Submit</button>
+    <form 
+        v-else 
+        @submit="submitForm" 
+        class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">   
+            <Input 
+                v-for="(field, fieldName) in fields"
+                :key="fieldName"
+                :name="fieldName"
+                :initial="formData[fieldName]"
+                :field="field"
+                :errors="errors[fieldName]"
+                @on-change="onChangeField"
+            />
+            <div class="flex justify-end">
+              <button 
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
+                  type="submit">
+                Submit
+              </button>
+            </div>
     </form>
 `;
 
@@ -38,7 +47,7 @@ export default class AlbumForm extends Vue {
     album_id: number | undefined;
     formData: Album = <Album>{};
     fields: AlbumFormFields = <AlbumFormFields>{};
-    errors: Array<any> = [];
+    errors: AlbumErrors = {};
     loading: boolean = true;
 
     mounted() {

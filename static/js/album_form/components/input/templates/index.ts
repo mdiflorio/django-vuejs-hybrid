@@ -7,4 +7,4 @@ export default {
     checkbox,
     select,
     standard
-}
+};

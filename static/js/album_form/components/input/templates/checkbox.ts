@@ -9,12 +9,8 @@ export const checkbox = `
                     :type="fieldType"
                     v-model="binding"
                 />
-                <label style="font-weight: bold" class="form-check-label">
-                    {{field.label}}
-                </label>
-                <div class="invalid-feedback" v-for="error in errors">
-                    {{ error }}
-                </div>
+                <InputLabel :label="field.label" :required="field.required" />
+                <InputErrors :errors="errors" />
             </div>
         </div>
-`
+`;

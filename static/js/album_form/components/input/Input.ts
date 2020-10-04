@@ -2,9 +2,12 @@ import Vue from 'vue';
 import { Component, Prop, Watch } from 'vue-property-decorator';
 import { Field } from '../../app.types';
 import templates from "./templates";
+import InputLabel from './InputLabel';
+import InputErrors from './InputErrors';
 
 @Component({
     name: 'Input',
+    components: {InputLabel, InputErrors}
 })
 export default class Input extends Vue {
     @Prop()

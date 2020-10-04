@@ -5,8 +5,10 @@
     const album_id =  {% if album_id %}{{ album_id }}{% else %}undefined{% endif %};
 </script>
 
-<div id="app" v-cloak >
-    <album-form/>
+<div id="app" v-cloak class="flex h-screen bg-gray-300">
+    <div class="w-full max-w-xs container m-auto">
+        <album-form/>
+    </div>
 </div>
 
 {% render_bundle 'album_form' %}

@@ -25,3 +25,10 @@ export interface Album {
     releaseDate: string;
     numStars: number;
 }
+
+export interface AlbumErrors {
+    artist?: Array<string>;
+    name?: Array<string>;
+    releaseDate?: Array<string>;
+    numStars?: Array<string>;
+}
