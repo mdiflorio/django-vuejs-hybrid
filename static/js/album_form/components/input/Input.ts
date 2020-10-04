@@ -26,7 +26,7 @@ export default class Input extends Vue {
     binding: any = '';
 
     // COMPUTED
-    get InputComponent() {
+    get InputTemplate() {
         switch(this.fieldType) {
             case 'checkbox':
                 return templates.checkbox;
@@ -59,7 +59,7 @@ export default class Input extends Vue {
     // METHODS
     created() {
         this.binding = this.initial;
-        this.$options.template = this.InputComponent;
+        this.$options.template = this.InputTemplate;
     }
 
 
