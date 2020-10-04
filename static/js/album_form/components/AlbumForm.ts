@@ -20,7 +20,7 @@ const template = `
 			v-for="(field, fieldName) in fields"
 			:key="fieldName"
             :name="fieldName"
-            :initial="formData.artist"
+            :initial="formData[fieldName]"
             :field="field"
             :errors="errors[fieldName]"
             @on-change="onChangeField"
@@ -52,6 +52,23 @@ export default class AlbumForm extends Vue {
         };
 
         this.getFormOptions();
+        this.getAlbumData();
+    }
+
+
+    getAlbumData() {
+        // @ts-ignore - Comes from the Django template
+        let id = album_id;
+
+        if (id) {
+            Axios.get(`/api/albums/${id}`)
+                .then((res) => {
+                    this.formData = res.data;
+                })
+                .catch((err) => {
+                    console.log('err', err);
+                });
+        }
     }
 
     getFormOptions() {
