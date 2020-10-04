@@ -5,7 +5,6 @@ import { Album, AlbumFormFields } from '../app.types';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookies';
 
-
 const Axios = axios.create({
     baseURL: '/music',
     headers: { 'X-CSRFToken': getCookie('csrftoken') },
