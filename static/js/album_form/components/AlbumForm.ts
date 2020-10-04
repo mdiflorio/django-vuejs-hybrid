@@ -25,6 +25,7 @@ const template = `
             :errors="errors[fieldName]"
             @on-change="onChangeField"
         />
+        <button type="submit">Submit</button>
     </form>
 `;
 
@@ -45,7 +46,7 @@ export default class AlbumForm extends Vue {
         // This data is what we will send to the server
         this.formData = {
 			    artist: 0,
-			    name: "",
+			    name: "test",
 			    releaseDate: "",
 			    numStars: 0
         };
@@ -67,8 +68,19 @@ export default class AlbumForm extends Vue {
     }
 
 
-    submitForm() {
-        //TODO - add axios code
+    submitForm(e: Event) {
+        Axios.post('/api/albums/', this.formData)
+            .then(this.handleSuccesSubmit)
+            .catch(this.handleErrorSubmit);
+
+        e.preventDefault();
+    }
+
+    handleSuccesSubmit (res: any) {
+        console.log(res);
+    }
+    handleErrorSubmit(err: any) {
+        this.errors = err.response.data;
     }
 
     // Handle the on change of any input
