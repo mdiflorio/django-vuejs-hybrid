@@ -5,9 +5,8 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from rest_framework import generics
 
-from atlas.apps.core.serializers import OptionsMetaData
-from atlas.apps.music.models import Album
-from atlas.apps.music.serializers import AlbumSerializer
+from music_django.apps.music.models import Album
+from music_django.apps.music.serializers import AlbumSerializer, OptionsMetaData
 
 
 class AlbumCreate(TemplateView):

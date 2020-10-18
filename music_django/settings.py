@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'music_django.apps.music',
+    "webpack_loader",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'music_django.wsgi.application'
 
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "assets"),)
+
+# WEBPACK CONFIG FOR NPM MODULES
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "BUNDLE_DIR_NAME": "webpack/",  # must end with slash
+        "STATS_FILE": os.path.join(BASE_DIR, "assets/webpack/webpack-stats.json"),
+        "POLL_INTERVAL": 0.1,
+        "TIMEOUT": None,
+        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
+        "LOADER_CLASS": "webpack_loader.loader.WebpackLoader",
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

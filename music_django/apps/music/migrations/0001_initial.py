@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('release_date', models.DateField()),
                 ('num_stars', models.IntegerField()),
-                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='music.musician')),
+                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='music_django.apps.music.musician')),
             ],
         ),
     ]
