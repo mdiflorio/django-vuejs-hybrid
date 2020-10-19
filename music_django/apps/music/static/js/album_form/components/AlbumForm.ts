@@ -11,30 +11,34 @@ const Axios = axios.create({
 });
 
 const template = `
-    <div v-if="loading" >
-        Loading...
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">   
+        <h1 class="text-2xl text-gray-700 mb-3">{{ title }}</h1>
+        <div v-if="loading" >
+            Loading...
+        </div>
+        <form 
+            v-else 
+            @submit="submitForm" >
+                <Input 
+                    v-for="(field, fieldName) in fields"
+                    :key="fieldName"
+                    :name="fieldName"
+                    :initial="formData[fieldName]"
+                    :field="field"
+                    :errors="errors[fieldName]"
+                    @on-change="onChangeField"
+                />
+                <div class="flex justify-end">
+                  <button 
+                      class="bg-blue-500 hover:bg-blue-700 text-white 
+                      font-bold py-2 px-4 rounded 
+                      focus:outline-none focus:shadow-outline" 
+                      type="submit">
+                    Submit
+                  </button>
+                </div>
+        </form>
     </div>
-    <form 
-        v-else 
-        @submit="submitForm" 
-        class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">   
-            <Input 
-                v-for="(field, fieldName) in fields"
-                :key="fieldName"
-                :name="fieldName"
-                :initial="formData[fieldName]"
-                :field="field"
-                :errors="errors[fieldName]"
-                @on-change="onChangeField"
-            />
-            <div class="flex justify-end">
-              <button 
-                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-                  type="submit">
-                Submit
-              </button>
-            </div>
-    </form>
 `;
 
 @Component({
@@ -44,6 +48,7 @@ const template = `
 })
 export default class AlbumForm extends Vue {
 
+    title: string = "";
     album_id: number | undefined;
     formData: Album = <Album>{};
     fields: AlbumFormFields = <AlbumFormFields>{};
@@ -53,6 +58,10 @@ export default class AlbumForm extends Vue {
     mounted() {
         // @ts-ignore - Comes from the Django template
         this.album_id = album_id;
+
+        if (this.album_id) this.title = "Update album";
+        else this.title = "Add new album";
+
         // Initialise our form data.
         // This data is what we will send to the server
         this.formData = {
@@ -108,7 +117,7 @@ export default class AlbumForm extends Vue {
     }
 
     handleSuccessSubmit(res: any) {
-        console.log(res);
+        alert("Success!")
     }
 
     handleErrorSubmit(err: any) {
