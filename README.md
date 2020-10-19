@@ -9,6 +9,9 @@ I've also added a generic form which is dynamically generated based of a Django 
 The aim was to have something as generic as possible that closely 
 resembles the functionality of Django Forms while using Vue.js.
 
+
+All of the Typescript code can be found within `music_django/apps/music/static/js/`
+
 ### Technologies
 - Django
 - Vue.js
