@@ -6,6 +6,12 @@ I've also added a generic form which is generated based of a Django model.
 The aim was to have something as generic as possible that closely 
 resembles the functionality of Django Forms while using Vue.js.
 
+### Technologies
+- Django
+- Vue.js
+- Webpack
+- Docker
+- Tailwind CSS
 
 ### Requirements
 This project requires Docker and Docker compose to run.
@@ -27,10 +33,16 @@ You can then head to
 
 Once you have succesfully created a new Album. 
 
+### Developement
+If you would like to develop on the project, install Yarn and run 
+```
+yarn install
+yarn serve
+```
 
-### Technologies
-- Django
-- Vue.js
-- Webpack
-- Docker
-- Tailwind CSS
+That will spin up the development server and give you hot reloading.
+
+To run webpack for production run:
+```
+yarn build
+```
