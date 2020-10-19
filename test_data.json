@@ -1,0 +1,26 @@
+[
+  {
+    "model": "music.musician",
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "instrument": "Guitar"
+    }
+  },
+  {
+    "model": "music.musician",
+    "fields": {
+      "first_name": "James",
+      "last_name": "Blue",
+      "instrument": "Drums"
+    }
+  },
+  {
+    "model": "music.musician",
+    "fields": {
+      "first_name": "Sam",
+      "last_name": "Green",
+      "instrument": "Bass"
+    }
+  }
+]

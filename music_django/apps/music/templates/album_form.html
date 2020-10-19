@@ -1,9 +1,4 @@
 {% load render_bundle from webpack_loader %}
-{% render_bundle 'chunk-vendors' %}
-
-<script>
-    const album_id =  {% if album_id %}{{ album_id }}{% else %}undefined{% endif %};
-</script>
 
 <div id="app" v-cloak class="flex h-screen bg-gray-300">
     <div class="w-full max-w-xs container m-auto">
@@ -11,5 +6,9 @@
     </div>
 </div>
 
+<script>
+    const album_id =  {% if album_id %}{{ album_id }}{% else %}undefined{% endif %};
+</script>
+{% render_bundle 'chunk-vendors' %}
 {% render_bundle 'album_form' %}
 
