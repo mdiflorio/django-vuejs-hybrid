@@ -1,8 +1,11 @@
 # Django - Vue.js hybrid
+
+![Screenshot](/screenshot.png?raw=true "Screenshot")
+
 The objective of this repo is to have a Djanog and Vue.js hybrid example. 
 Here I've show how to integrate Vue.js and Webpack into a Django application. 
 
-I've also added a generic form which is generated based of a Django model. 
+I've also added a generic form which is dynamically generated based of a Django model. 
 The aim was to have something as generic as possible that closely 
 resembles the functionality of Django Forms while using Vue.js.
 
