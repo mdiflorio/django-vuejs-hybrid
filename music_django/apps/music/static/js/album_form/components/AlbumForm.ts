@@ -4,6 +4,9 @@ import Input from './input/Input';
 import { Album, AlbumErrors, AlbumFormFields } from '../app.types';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookies';
+import Button from '@/music/static/js/album_form/components/generic/Button';
+import Heading from '@/music/static/js/album_form/components/generic/Heading';
+import Card from '@/music/static/js/album_form/components/generic/Card';
 
 const Axios = axios.create({
     baseURL: '/music',
@@ -11,11 +14,9 @@ const Axios = axios.create({
 });
 
 const template = `
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">   
-        <h1 class="text-2xl text-gray-700 mb-3">{{ title }}</h1>
-        <div v-if="loading" >
-            Loading...
-        </div>
+    <Card>   
+        <Heading :text="title" />
+        <div v-if="loading" >Loading...</div>
         <form 
             v-else 
             @submit="submitForm" >
@@ -29,22 +30,16 @@ const template = `
                     @on-change="onChangeField"
                 />
                 <div class="flex justify-end">
-                  <button 
-                      class="bg-blue-500 hover:bg-blue-700 text-white 
-                      font-bold py-2 px-4 rounded 
-                      focus:outline-none focus:shadow-outline" 
-                      type="submit">
-                    Submit
-                  </button>
+                    <Button text="Submit" type="submit" />
                 </div>
         </form>
-    </div>
+    </Card>
 `;
 
 @Component({
     template,
     name: 'AlbumForm',
-    components: { Input },
+    components: { Card, Input, Button, Heading },
 })
 export default class AlbumForm extends Vue {
 
