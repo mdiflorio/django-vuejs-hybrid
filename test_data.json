@@ -1,6 +1,7 @@
 [
   {
     "model": "music.musician",
+    "pk": 1,
     "fields": {
       "first_name": "John",
       "last_name": "Doe",
@@ -9,6 +10,7 @@
   },
   {
     "model": "music.musician",
+    "pk": 2,
     "fields": {
       "first_name": "James",
       "last_name": "Blue",
@@ -17,6 +19,7 @@
   },
   {
     "model": "music.musician",
+    "pk": 3,
     "fields": {
       "first_name": "Sam",
       "last_name": "Green",
