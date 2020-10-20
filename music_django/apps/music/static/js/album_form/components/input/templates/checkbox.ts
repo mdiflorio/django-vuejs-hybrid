@@ -1,16 +1,16 @@
-
-
 export const checkbox = `
-        <div class="form-group">
-            <div class="form-check">
-                <input
-                    :name="name"
-                    :class="{checkboxinput: true, 'form-check-input': true, 'is-invalid': errors}"
-                    :type="fieldType"
-                    v-model="binding"
-                />
-                <InputLabel :label="field.label" :required="field.required" />
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">
+                    <input
+                        :name="name"
+                        class="mr-2 leading-tight"
+                        :type="fieldType"
+                        v-model="binding"
+                    />
+                  <span class="text-sm">
+                    {{ field.label }}
+                  </span>
+                </label> 
                 <InputErrors :errors="errors" />
-            </div>
         </div>
 `;

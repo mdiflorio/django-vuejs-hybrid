@@ -4,9 +4,9 @@ import Input from './input/Input';
 import { Album, AlbumErrors, AlbumFormFields } from '../app.types';
 import axios from 'axios';
 import { getCookie } from '../../utils/cookies';
-import Button from '@/music/static/js/album_form/components/generic/Button';
-import Heading from '@/music/static/js/album_form/components/generic/Heading';
-import Card from '@/music/static/js/album_form/components/generic/Card';
+import Button from '../components/generic/Button';
+import Heading from '../components/generic/Heading';
+import Card from '../components/generic/Card';
 
 const Axios = axios.create({
     baseURL: '/music',
