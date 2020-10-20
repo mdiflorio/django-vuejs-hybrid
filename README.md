@@ -3,9 +3,9 @@
 ![Screenshot](/screenshot.png?raw=true "Screenshot")
 
 The objective of this repo is to have a Djanog and Vue.js hybrid example. 
-Here I've show how to integrate Vue.js and Webpack into a Django application. 
+Here I've shown how to integrate Vue.js and Webpack into a Django application. 
 
-I've also added a generic form which is dynamically generated based of a Django model. 
+I've also added a generic form which is dynamically generated based off of a Django model. 
 The aim was to have something as generic as possible that closely 
 resembles the functionality of Django Forms while using Vue.js.
 
@@ -40,7 +40,7 @@ You can then head to
 Once you have succesfully created a new Album. 
 
 ### Developement
-If you would like to develop on the project, install Yarn and run 
+If you would like to run the dev server for Webpack, install Yarn and run 
 ```
 yarn install
 yarn serve
